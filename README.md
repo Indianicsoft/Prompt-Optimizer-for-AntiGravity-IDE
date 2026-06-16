@@ -1,57 +1,185 @@
-# Prompt Optimizer for AntiGravity IDE
+<div align="center">
 
-Prompt Optimizer for AntiGravity IDE is an open-source developer tool that transforms rough coding prompts into structured, token-efficient, execution-ready prompts for AntiGravity workflows.[1]
+# ⚡ Prompt Optimizer for AntiGravity IDE
 
-## Overview
+**Transform vague coding requests into structured, execution-ready prompts — built for AntiGravity IDE workflows.**
 
-This project helps developers improve prompt clarity, structure, output control, and execution readiness for software-building tasks, reflecting current best practices for healthy, contributor-friendly repositories on GitHub.[1][2]
+[
+[
+[
+[
+[
 
-The product is designed for prompt transformation, template-based optimization, prompt versioning, scoring, and export. A live demo, screenshots, and contribution workflow should be included in the repository because clear documentation and onboarding materially improve open-source adoption.[1][3]
+</div>
 
-## Core Features
+***
 
-- Raw prompt to optimized prompt transformation.
-- Task-type detection for build, bug-fix, enhancement, refactor, UI redesign, Firebase integration, AI or ML feature work, performance optimization, and patch generation.
-- Prompt template engine with reusable structured presets.
-- Constraint builder for browser-only, no-framework, vanilla JS, safe patching, and similar rules.
-- Prompt scoring for clarity, specificity, ambiguity risk, completeness, and execution readiness.
-- Versioning, save flow, compare mode, and export as text, Markdown, or JSON.
+## What Is This?
+
+**Prompt Optimizer for AntiGravity IDE** is an open-source developer tool that takes rough, vague, or unstructured coding requests and transforms them into highly structured, token-efficient, execution-ready prompts for [AntiGravity IDE](https://antigravity.dev) workflows.
+
+Instead of spending time rewriting the same prompt three times hoping for a better result — you paste your raw intent, pick your mode, set your constraints, and get a polished prompt you can paste directly into Gemini 3 Flash or Claude Opus inside AntiGravity.
+
+### The Problem It Solves
+
+Most developers write prompts like this:
+
+> *"Build me a Firebase social app with a profile page and messaging."*
+
+And wonder why the model output is incomplete, inconsistent, or misses key files.
+
+This tool transforms that into a structured, model-specific, constraint-enforced, file-targeted prompt that gets the job done the first time.
+
+***
+
+## Screenshots
+
+> *(Coming soon — add yours with a PR!)*
+
+***
+
+## Features
+
+### Core Engine
+- **Prompt Transformation Pipeline** — analyzes raw prompts and restructures them with role framing, task framing, constraints, output targeting, and verification steps
+- **Task Mode Detection** — auto-detects: New Build / Bug Fix / Enhancement / Refactor / UI Redesign / Firebase Integration / AI-ML Build / Performance / Patch / Token Compression
+- **Constraint Builder** — toggle constraints like `No Frameworks`, `Browser-Only`, `Vanilla JS`, `No Node.js`, `Single-File Output`, `Plan-First Mode`, and more
+- **Model Style Presets** — switch between Gemini-style compact prompt, Claude-style spec prompt, Safe Patch prompt, Full Rewrite, Browser-Only Strict
+
+### Prompt Management
+- **Save & Version Prompts** — create versions, compare before/after, label by project and model target
+- **Template Library** — 20+ reusable structured prompt templates for common dev scenarios
+- **Prompt Quality Scoring** — scores every prompt on Clarity, Specificity, Constraint Coverage, Token Efficiency, Output Control, Ambiguity Risk
+- **Change Explanation Panel** — see exactly what the optimizer added, removed, or restructured and why
+
+### Export & Sharing
+- Copy to clipboard in one click
+- Export as `.txt`, `.md`, or `.json`
+- Save as a reusable template
+- Share prompts via link (coming in v0.2.0)
+
+***
+
+## Prompt Modes Supported
+
+| Mode | Description |
+|------|-------------|
+| New App Build | Greenfield project generation with file plan |
+| Bug Fix | Safe, surgical fix prompt targeting specific functions |
+| Enhancement | Additive features on existing codebase, non-destructive |
+| Refactor | Code improvement without behavior change |
+| UI Redesign | Visual overhaul with layout and style specs |
+| Firebase Integration | Auth, Firestore, Storage, Realtime DB wiring |
+| AI / ML Build | Browser-native inference, WebGPU, training loop, LLM architecture |
+| Performance | Optimization patches with benchmarking rules |
+| Multi-File Patch | Targeted file-by-file patch generation |
+| Token Compression | Compress verbose prompts while preserving precision |
+
+***
+
+## Model Style Presets
+
+| Preset | Best For |
+|--------|----------|
+| Gemini Compact | Gemini 3 Flash — tight structured directives |
+| Claude Spec | Claude Opus — architecture-first specification format |
+| Safe Patch | Bug fixes that must not break other files |
+| Full Rewrite | Greenfield or major refactor generation |
+| Browser-Only Strict | Vanilla JS, no frameworks, no Node.js, browser APIs only |
+
+***
 
 ## Tech Stack
 
-- Frontend: JavaScript or TypeScript web app.
-- Backend and persistence: Firebase Auth and Firestore.
-- Data-driven prompt templates, presets, scoring rules, and transformation passes.
-- GitHub-friendly modular structure for templates, engines, and contribution workflows.
+| Layer | Technology |
+|-------|------------|
+| Frontend | HTML, CSS, JavaScript |
+| Auth | Firebase Authentication |
+| Database | Firebase Firestore |
+| Hosting | Firebase Hosting |
+| Prompt Engine | Modular JavaScript (no external AI API required for core optimization) |
 
-## Repository Structure
+***
 
-```text
+## Getting Started
+
+### Prerequisites
+
+- Node.js (for Firebase CLI)
+- A Firebase project (free tier works)
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/rohiththirunahari/prompt-optimizer-antigravity.git
+cd prompt-optimizer-antigravity
+```
+
+### 2. Install Firebase CLI
+
+```bash
+npm install -g firebase-tools
+firebase login
+```
+
+### 3. Configure Firebase
+
+Create a `.env` file or update `services/firebase/config.js` with your Firebase project credentials:
+
+```js
+// services/firebase/config.js
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+```
+
+> ⚠️ Never commit real Firebase credentials. Use environment variables or keep `config.js` in `.gitignore`.
+
+### 4. Run locally
+
+```bash
+firebase serve
+```
+
+Or just open `index.html` in a browser if you want to test the prompt engine without Firebase auth.
+
+### 5. Deploy
+
+```bash
+firebase deploy
+```
+
+***
+
+## Folder Structure
+
+```
 prompt-optimizer-antigravity/
-├── app/
-├── components/
+├── app/                    # App shell, routing, layout
+├── components/             # Reusable UI components
 ├── modules/
-│   ├── intent-parser/
-│   ├── classifier/
-│   ├── constraint-engine/
-│   ├── template-engine/
-│   ├── scoring-engine/
-│   └── explain-engine/
+│   ├── intent-parser/      # Detect task type from raw prompt
+│   ├── classifier/         # Classify and label the prompt
+│   ├── constraint-engine/  # Inject and manage constraints
+│   ├── template-engine/    # Compose structured prompt from templates
+│   ├── scoring-engine/     # Score prompt quality
+│   └── explain-engine/     # Explain what the optimizer changed
 ├── services/
-│   ├── firebase/
-│   └── storage/
+│   ├── firebase/           # Auth, Firestore, Hosting config
+│   └── storage/            # Saved prompts, versions, templates
 ├── data/
-│   ├── templates/
-│   ├── presets/
-│   └── rules/
-├── public/
-├── screenshots/
-├── docs/
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   ├── workflows/
-│   ├── CODEOWNERS
-│   └── pull_request_template.md
+│   ├── templates/          # JSON prompt templates
+│   ├── presets/            # Model style presets
+│   └── rules/              # Scoring and transformation rules
+├── public/                 # Static assets
+├── screenshots/            # App screenshots for README
+├── docs/                   # Extended documentation
+├── .github/                # Issue templates, PR template, workflows
 ├── README.md
 ├── LICENSE
 ├── CONTRIBUTING.md
@@ -60,100 +188,110 @@ prompt-optimizer-antigravity/
 └── CHANGELOG.md
 ```
 
-## Getting Started
+***
 
-### 1. Clone the repository
+## How the Prompt Engine Works
 
-```bash
-git clone https://github.com/your-username/prompt-optimizer-antigravity.git
-cd prompt-optimizer-antigravity
+```
+Raw Prompt Input
+      │
+      ▼
+Intent Parser          → detects task type (build / fix / redesign...)
+      │
+      ▼
+Prompt Classifier      → labels mode, identifies missing context
+      │
+      ▼
+Constraint Injector    → adds applicable constraints (no frameworks, etc.)
+      │
+      ▼
+Template Engine        → selects + fills structured prompt blueprint
+      │
+      ▼
+Compression Optimizer  → removes redundancy, improves signal density
+      │
+      ▼
+Output Formatter       → formats for target model style (Gemini / Claude)
+      │
+      ▼
+Scoring Engine         → scores result and flags remaining weaknesses
+      │
+      ▼
+Change Explainer       → lists exactly what was changed and why
+      │
+      ▼
+Optimized Prompt Output
 ```
 
-### 2. Install dependencies
+***
 
-```bash
-npm install
-```
+## Firestore Data Model
 
-### 3. Configure Firebase
+| Collection | Purpose |
+|------------|---------|
+| `users` | User profiles and preferences |
+| `prompts` | Saved optimized prompts |
+| `promptVersions` | Version history per prompt |
+| `templates` | Saved and community templates |
+| `presets` | Model style presets per user |
+| `usageStats` | Dashboard analytics |
 
-Create a local environment file and add the Firebase project values required by the app.
-
-```bash
-cp .env.example .env.local
-```
-
-Add values similar to:
-
-```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-```
-
-### 4. Run locally
-
-```bash
-npm run dev
-```
-
-## Firebase Collections
-
-Suggested Firestore collections:
-
-- `users`
-- `prompts`
-- `promptVersions`
-- `templates`
-- `presets`
-- `usageStats`
-
-Each prompt record should support fields such as:
-
-- `id`
-- `title`
-- `rawPrompt`
-- `optimizedPrompt`
-- `mode`
-- `modelTarget`
-- `constraints`
-- `scoreBreakdown`
-- `explanation`
-- `tags`
-- `createdAt`
-- `updatedAt`
-- `versionNumber`
-
-## Open Source Setup
-
-A public repository should include a README, license, and contribution guidance so users and contributors can clearly understand project purpose, permissions, and participation rules.[1][4][2]
-
-Recommended repository settings:
-
-- Add a short repository description.
-- Add relevant topics so the project is easier to discover on GitHub.[5][6]
-- Add a social preview image for better sharing previews.[7]
-- Enable Issues, Discussions, and Projects if community collaboration is a goal.[5]
-- Protect the default branch and require pull requests for changes to `main`.[8]
-
-## Contributing
-
-Contributions are welcome. Before opening a pull request:
-
-1. Read `CONTRIBUTING.md`.
-2. Search for existing issues.
-3. Open an issue for substantial feature proposals.
-4. Keep pull requests focused and easy to review.
+***
 
 ## Roadmap
 
-- v0.1.0: MVP optimizer workspace, templates, scoring, save flow, export.
-- v0.2.0: Version comparison, richer explanation engine, improved template presets.
-- v1.0.0: Stable public release with polished docs, hosted demo, and contributor tooling.
+### v0.1.0 — MVP ✅
+- Optimizer workspace
+- 10 task modes
+- 5 model style presets
+- Constraint toggles
+- Prompt scoring
+- Save and export
+- Firebase auth and Firestore
+
+### v0.2.0 — ✅
+- Prompt version comparison view
+- Shareable prompt links
+- Community template library
+- Import prompt from file
+
+### v0.3.0 — ✅
+- Team workspaces
+- Prompt analytics dashboard
+- GitHub integration
+- AntiGravity IDE plugin (research phase)
+
+### v1.0.0 — Stable Release ✅
+- Stable public API
+- Full docs site
+- Contributor template pack
+- Extended model presets
+
+***
+
+## Contributing
+
+Contributions are warmly welcomed. This project is designed specifically so that adding new prompt templates, scoring rules, model presets, or transformation passes is easy and doesn't require understanding the entire codebase.
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup, rules, and the contribution paths best suited for first-time contributors.
+
+***
 
 ## License
 
-This project is licensed under the MIT License. A license is important because open-source permissions should be explicit rather than assumed.[4][9]
+Distributed under the MIT License. See [LICENSE](./LICENSE) for full text.
+
+***
+
+## Built By
+
+**Rohith Thirunahari** — [@rohiththirunahari](https://github.com/indianicsoft)  
+
+***
+
+<div align="center">
+
+If this project saved you time, consider giving it a ⭐ on GitHub.  
+Pull requests, ideas, and prompt templates are always welcome.
+
+</div>
