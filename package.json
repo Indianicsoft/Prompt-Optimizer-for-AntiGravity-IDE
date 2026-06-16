@@ -1,0 +1,26 @@
+{
+  "name": "prompt-optimizer-antigravity",
+  "version": "1.0.0",
+  "description": "Developer prompt optimizer for AntiGravity IDE - transformations, scoring, templates, styles and versions.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "antigravity",
+    "prompt-engineering",
+    "developer-tools",
+    "prompt-optimizer",
+    "firebase"
+  ],
+  "author": "Antigravity Team",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^10.12.0"
+  },
+  "devDependencies": {
+    "vite": "^5.2.11"
+  }
+}
