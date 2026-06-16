@@ -1,159 +1,170 @@
-# Prompt Optimizer for AntiGravity IDE
+# Contributing to Prompt Optimizer for AntiGravity IDE
 
-Prompt Optimizer for AntiGravity IDE is an open-source developer tool that transforms rough coding prompts into structured, token-efficient, execution-ready prompts for AntiGravity workflows.[1]
+Thank you for taking the time to contribute. This project is designed so that contributions are modular and focused — you can add a new prompt template, a scoring rule, or a model preset without needing to understand the whole codebase.
 
-## Overview
+***
 
-This project helps developers improve prompt clarity, structure, output control, and execution readiness for software-building tasks, reflecting current best practices for healthy, contributor-friendly repositories on GitHub.[1][2]
+## Ways to Contribute
 
-The product is designed for prompt transformation, template-based optimization, prompt versioning, scoring, and export. A live demo, screenshots, and contribution workflow should be included in the repository because clear documentation and onboarding materially improve open-source adoption.[1][3]
+The easiest entry points are:
 
-## Core Features
+- **Add a new prompt template** — add a JSON file to `data/templates/`
+- **Add a new model style preset** — add a config file to `data/presets/`
+- **Improve scoring rules** — edit or add rules in `data/rules/`
+- **Fix a bug** — pick an issue labeled `bug` and submit a fix
+- **Improve UI** — issues labeled `ui` cover design improvements
+- **Improve docs** — fix README, add examples, improve docstrings
+- **Report an issue** — open a detailed bug report or feature request
 
-- Raw prompt to optimized prompt transformation.
-- Task-type detection for build, bug-fix, enhancement, refactor, UI redesign, Firebase integration, AI or ML feature work, performance optimization, and patch generation.
-- Prompt template engine with reusable structured presets.
-- Constraint builder for browser-only, no-framework, vanilla JS, safe patching, and similar rules.
-- Prompt scoring for clarity, specificity, ambiguity risk, completeness, and execution readiness.
-- Versioning, save flow, compare mode, and export as text, Markdown, or JSON.
+***
 
-## Tech Stack
+## Local Setup
 
-- Frontend: JavaScript or TypeScript web app.
-- Backend and persistence: Firebase Auth and Firestore.
-- Data-driven prompt templates, presets, scoring rules, and transformation passes.
-- GitHub-friendly modular structure for templates, engines, and contribution workflows.
+### Prerequisites
 
-## Repository Structure
+- Node.js (for Firebase CLI)
+- A Firebase project (free tier is fine)
+- Any code editor
 
-```text
-prompt-optimizer-antigravity/
-├── app/
-├── components/
-├── modules/
-│   ├── intent-parser/
-│   ├── classifier/
-│   ├── constraint-engine/
-│   ├── template-engine/
-│   ├── scoring-engine/
-│   └── explain-engine/
-├── services/
-│   ├── firebase/
-│   └── storage/
-├── data/
-│   ├── templates/
-│   ├── presets/
-│   └── rules/
-├── public/
-├── screenshots/
-├── docs/
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   ├── workflows/
-│   ├── CODEOWNERS
-│   └── pull_request_template.md
-├── README.md
-├── LICENSE
-├── CONTRIBUTING.md
-├── CODE_OF_CONDUCT.md
-├── SECURITY.md
-└── CHANGELOG.md
-```
-
-## Getting Started
-
-### 1. Clone the repository
+### Steps
 
 ```bash
-git clone https://github.com/your-username/prompt-optimizer-antigravity.git
+# 1. Fork the repo on GitHub
+# 2. Clone your fork
+git clone https://github.com/YOUR_USERNAME/prompt-optimizer-antigravity.git
 cd prompt-optimizer-antigravity
+
+# 3. Install Firebase CLI
+npm install -g firebase-tools
+firebase login
+
+# 4. Add your Firebase config
+# Copy services/firebase/config.example.js → services/firebase/config.js
+# Fill in your own Firebase project credentials
+
+# 5. Run locally
+firebase serve
+
+# Or just open index.html directly for UI testing without auth
 ```
 
-### 2. Install dependencies
+***
 
-```bash
-npm install
+## Branch Naming
+
+| Type | Format | Example |
+|------|--------|---------|
+| Bug fix | `fix/short-description` | `fix/score-panel-null` |
+| New feature | `feat/short-description` | `feat/version-compare` |
+| New template | `template/template-name` | `template/firebase-crud` |
+| New preset | `preset/model-name` | `preset/gemini-ultra` |
+| Docs | `docs/section-name` | `docs/setup-guide` |
+| UI change | `ui/component-name` | `ui/optimizer-workspace` |
+
+***
+
+## Commit Message Style
+
+Use short, clear commit messages:
+
+```
+fix: null score when prompt is empty
+feat: add version comparison view
+template: add firebase-auth-admin template
+docs: improve setup instructions
+ui: polish optimizer workspace layout
 ```
 
-### 3. Configure Firebase
+***
 
-Create a local environment file and add the Firebase project values required by the app.
+## Adding a Prompt Template
 
-```bash
-cp .env.example .env.local
+All templates live in `data/templates/`. Each template is a `.json` file.
+
+### Template format
+
+```json
+{
+  "id": "firebase-crud-app",
+  "name": "Firebase CRUD App",
+  "description": "Greenfield Firebase-backed CRUD app with auth, Firestore, and admin panel.",
+  "mode": "new-build",
+  "targetModel": "gemini-compact",
+  "constraints": [
+    "browser-only",
+    "vanilla-js",
+    "firebase-only",
+    "no-frameworks"
+  ],
+  "sections": {
+    "role": "Senior full-stack web developer. Browser-only. No frameworks. No Node.js.",
+    "task": "Build a complete CRUD web application using Firebase Auth and Firestore.",
+    "outputTargets": ["index.html", "style.css", "app.js", "firebase.js"],
+    "constraints": [
+      "Browser-only. No Node.js.",
+      "No external libraries.",
+      "Use Firebase Auth for authentication.",
+      "Use Firestore for all data.",
+      "Guard all private routes with auth check."
+    ],
+    "planFirst": true,
+    "verificationChecklist": [
+      "Auth flow works",
+      "CRUD operations complete",
+      "Error states handled",
+      "Responsive layout"
+    ]
+  },
+  "tags": ["firebase", "crud", "vanilla-js", "browser-only"],
+  "author": "your-github-username",
+  "version": "1.0.0"
+}
 ```
 
-Add values similar to:
+***
 
-```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
+## Adding a Scoring Rule
+
+Scoring rules live in `data/rules/scoring.json`. Each rule has an id, a check type, a condition, and a score delta.
+
+```json
+{
+  "id": "has-role-definition",
+  "label": "Role Definition",
+  "checkType": "contains-pattern",
+  "condition": "ROLE:|Role:|You are a",
+  "scoreDelta": 10,
+  "maxScore": 10,
+  "explanation": "Prompts with an explicit role definition get more consistent model output."
+}
 ```
 
-### 4. Run locally
+***
 
-```bash
-npm run dev
-```
+## Pull Request Checklist
 
-## Firebase Collections
+Before submitting a PR, confirm:
 
-Suggested Firestore collections:
+- [ ] The app still runs locally without errors
+- [ ] No unrelated files were changed
+- [ ] Commit messages are clear and follow the style guide
+- [ ] If adding a template — it follows the correct JSON schema
+- [ ] If adding a UI feature — tested at desktop and mobile
+- [ ] If fixing a bug — the fix is targeted and does not regress other features
+- [ ] Documentation updated if behavior changed
 
-- `users`
-- `prompts`
-- `promptVersions`
-- `templates`
-- `presets`
-- `usageStats`
+***
 
-Each prompt record should support fields such as:
+## Code Style
 
-- `id`
-- `title`
-- `rawPrompt`
-- `optimizedPrompt`
-- `mode`
-- `modelTarget`
-- `constraints`
-- `scoreBreakdown`
-- `explanation`
-- `tags`
-- `createdAt`
-- `updatedAt`
-- `versionNumber`
+- Use clear, readable variable and function names
+- No dead code or commented-out blocks
+- No `console.log` in production paths
+- Keep files focused — one responsibility per module
+- Prefer clarity over cleverness
 
-## Open Source Setup
+***
 
-A public repository should include a README, license, and contribution guidance so users and contributors can clearly understand project purpose, permissions, and participation rules.[1][4][2]
+## Need Help?
 
-Recommended repository settings:
-
-- Add a short repository description.
-- Add relevant topics so the project is easier to discover on GitHub.[5][6]
-- Add a social preview image for better sharing previews.[7]
-- Enable Issues, Discussions, and Projects if community collaboration is a goal.[5]
-- Protect the default branch and require pull requests for changes to `main`.[8]
-
-## Contributing
-
-Contributions are welcome. Before opening a pull request:
-
-1. Read `CONTRIBUTING.md`.
-2. Search for existing issues.
-3. Open an issue for substantial feature proposals.
-4. Keep pull requests focused and easy to review.
-
-## Roadmap
-
-- v0.1.0: MVP optimizer workspace, templates, scoring, save flow, export.
-- v0.2.0: Version comparison, richer explanation engine, improved template presets.
-- v1.0.0: Stable public release with polished docs, hosted demo, and contributor tooling.
-
-## License
-
-This project is licensed under the MIT License. A license is important because open-source permissions should be explicit rather than assumed.[4][9]
+Open an issue with the label `question` or start a GitHub Discussion. All skill levels are welcome.
