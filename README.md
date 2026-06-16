@@ -4,12 +4,6 @@
 
 **Transform vague coding requests into structured, execution-ready prompts — built for AntiGravity IDE workflows.**
 
-[
-[
-[
-[
-[
-
 </div>
 
 ***
