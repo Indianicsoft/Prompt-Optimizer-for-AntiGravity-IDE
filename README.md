@@ -6,7 +6,7 @@ It works 100% locally out-of-the-box using rules-based transformers, parsers, an
 
 ---
 
-## Key Features
+## Key Features 
 
 1. **Structured Compiling Pipeline**: Automatically injects role framing, context mapping, active targets, rules, and explicit formats.
 2. **Task Type Classifier**: Automatically identifies if the instruction represents a greenfield build, fix, refactor, UI redesign, or Firebase integration.
